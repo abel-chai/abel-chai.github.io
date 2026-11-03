@@ -81,8 +81,21 @@ hexo clean; hexo generate; hexo server
 
 1. 21:00 起草，md 放进 `source/_drafts/`，**先不 commit、不 push**；
 2. 每篇单独发给 R宝：标题、摘要、正文要点；
-3. 他说行 → 移到 `source/_posts/`，`git push origin source` → Actions 自动部署；
+3. 他点头后，在 frontmatter 加 `approved: true` 和 `publish_at`，**留在 `_drafts`**，由发布队列统一发；
 4. 没回应就停在草稿状态，绝不自己发。
+
+## 发布时间（2026-11-03 定）
+
+- **当天 24:00 前确认** → 次日 **09:00** 固定发布，文章的 `date` 就写发布时刻；
+- **次日及以后才确认** → 以**确认时刻**为发布时间，立刻发。
+
+落地方式：
+
+- 确认后在草稿 frontmatter 里写 `approved: true` 和 `publish_at: YYYY-MM-DD HH:MM:SS`；
+- 每天 09:00 的定时任务跑 `python tools\publish_queue.py --apply`，把到期的搬到 `_posts`、改 `date`、单独 commit 再 push；
+- 同一条规则也适用于「确认当时就发」的情况：`publish_at` 写成当前时间，脚本下一次跑就会放出去，或者当场手动搬。
+
+这样「晚上点头」和「第二天才点头」的稿子，发出来时间就是对的，不会出现文章日期写着明天、今天却已经上线的情况。
 
 ## 发布纪律（2026-11-03 吃了教训）
 
