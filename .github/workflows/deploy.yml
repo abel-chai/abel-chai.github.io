@@ -26,7 +26,7 @@ jobs:
           node-version: 20
 
       - name: Clone Butterfly theme
-        run: git clone --depth 1 -b 4.13 https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
+        run: git clone --depth 1 -b 4.12 https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
 
       - name: Install dependencies
         run: npm install --no-audit --no-fund
