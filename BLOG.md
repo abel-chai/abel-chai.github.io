@@ -84,6 +84,13 @@ hexo clean; hexo generate; hexo server
 3. 他说行 → 移到 `source/_posts/`，`git push origin source` → Actions 自动部署；
 4. 没回应就停在草稿状态，绝不自己发。
 
+## 发布纪律（2026-11-03 吃了教训）
+
+- **只动被确认的那一篇**：`Move-Item` 指定文件，`git add` 指定路径，单独 commit。
+- **禁止 `git add -A` / `git add .`**：它会把 `_drafts` 里所有未确认的稿子一起扫进去，等于绕过确认。
+- push 前先 `git status --short` 看一眼，确认变更里只有该发的那一篇 + 必要的文档改动。
+- 需要一起提交文档（选题池、思考线索）时，单独一次 commit，别和文章混在一起。
+
 ## 规矩
 
 写完先给 R宝 看草稿，他点头再 push。不要自己直接发。
