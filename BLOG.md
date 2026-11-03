@@ -93,7 +93,7 @@ hexo clean; hexo generate; hexo server
 
 - 确认后在草稿 frontmatter 里写 `approved: true` 和 `publish_at: YYYY-MM-DD HH:MM:SS`；
 - 每天 09:00 的定时任务跑 `python tools\publish_queue.py --apply`，把到期的搬到 `_posts`、改 `date`、单独 commit 再 push；
-- 同一条规则也适用于「确认当时就发」的情况：`publish_at` 写成当前时间，脚本下一次跑就会放出去，或者当场手动搬。
+- **「次日才确认」的情况不要等队列**：队列一天只跑一次，上午点头的话要干等到第二天 09:00。这种就直接 `publish_at` 写当前时间，当场手动搬、当场 push（日期用确认时刻）。
 
 这样「晚上点头」和「第二天才点头」的稿子，发出来时间就是对的，不会出现文章日期写着明天、今天却已经上线的情况。
 
