@@ -24,7 +24,7 @@ REQUIRED = ["title", "date", "permalink", "categories", "description"]
 
 
 def parse(path: Path):
-    text = path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8-sig")
     m = re.match(r"(?s)^---\s*\n(.*?)\n---\s*\n", text)
     if not m:
         return None, text

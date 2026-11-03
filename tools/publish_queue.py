@@ -41,7 +41,7 @@ def main(argv):
     moved, waiting, broken = [], [], []
 
     for path in sorted(DRAFTS.glob("*.md")):
-        text = path.read_text(encoding="utf-8")
+        text = path.read_text(encoding="utf-8-sig")
         head, fm, body = split_fm(text)
         if fm is None:
             continue
