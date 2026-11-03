@@ -83,3 +83,9 @@ search:
   field: post
   content: true
   format: html
+
+# 关闭英文智能引号，中文标点自己写
+marked:
+  smartypants: false
+  modifyAnchors: 0
+  prependRoot: true
