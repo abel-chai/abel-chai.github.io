@@ -1,0 +1,85 @@
+# Hexo Configuration
+title: abel的学习录
+subtitle: ''
+description: '把看到的东西，写成能留下来的字'
+keywords: 观后感, 论文笔记, 学习记录
+author: abel
+language: zh-CN
+timezone: 'Asia/Shanghai'
+
+# URL
+url: https://abel-chai.github.io
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+
+# 交给 butterfly 自己的代码高亮
+syntax_highlighter: prismjs
+highlight:
+  enable: false
+prismjs:
+  enable: false
+
+# Home page setting
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Metadata elements
+meta_generator: true
+
+# Date / Time format
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: 'mtime'
+
+# Pagination
+per_page: 10
+pagination_dir: page
+
+# Include / Exclude file(s)
+include:
+exclude:
+ignore:
+
+# Extensions
+theme: butterfly
+
+# 本地搜索（butterfly local_search 用）
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html

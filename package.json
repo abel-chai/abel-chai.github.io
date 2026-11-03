@@ -1,0 +1,30 @@
+{
+  "name": "abel-blog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "abel的学习录 — Hexo 源文件",
+  "scripts": {
+    "build": "hexo generate",
+    "clean": "hexo clean",
+    "server": "hexo server"
+  },
+  "hexo": {
+    "version": "6.3.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "hexo-util"
+    ]
+  },
+  "dependencies": {
+    "hexo": "6.3.0",
+    "hexo-generator-archive": "^1.0.0",
+    "hexo-generator-category": "^1.0.0",
+    "hexo-generator-index": "^3.0.0",
+    "hexo-generator-searchdb": "^1.4.1",
+    "hexo-generator-tag": "^1.0.0",
+    "hexo-renderer-marked": "^6.0.0",
+    "hexo-renderer-pug": "^3.0.0",
+    "hexo-renderer-stylus": "^3.0.1"
+  }
+}

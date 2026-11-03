@@ -1,0 +1,230 @@
+# ==========================================
+# Butterfly 主题配置（还原 abel-chai.github.io 原站）
+# ==========================================
+
+# 导航栏
+nav:
+  主页: /
+  归档: /archives/
+  标签: /tags/
+  分类: /categories/
+  留言: /comments/
+  关于: /about/
+
+# 社交图标
+social:
+  fab fa-github: https://github.com/abel-chai || Github
+  fas fa-envelope: mailto:rk.chai@qq.com || Email
+
+# 头像
+avatar:
+  img: /img/avatar.jpg
+  effect: false
+
+# 站点图标
+favicon: /img/favicon.png
+
+# 首页与内页图
+index_img: /img/background.jpg
+default_top_img: /img/background.jpg
+archive_img:
+tag_img:
+category_img:
+
+# 导航栏设置
+nav_settings:
+  fixed: true
+
+# 目录
+toc:
+  post: true
+  page: true
+  number: true
+  expand: false
+  style_simple: false
+
+# 代码
+code_blocks:
+  theme: light
+  macStyle: true
+  copy: true
+  language: true
+  shrink: false
+  fullpage: false
+
+# 复制
+copy:
+  enable: true
+  copyright:
+    enable: true
+    limit_count: 50
+
+# 文章元信息
+post_meta:
+  page:
+    date_type: created
+    date_format: date
+    categories: true
+    tags: false
+    label: true
+  post:
+    date_type: both
+    date_format: date
+    categories: true
+    tags: true
+    label: true
+
+# 相关文章
+related_post:
+  enable: true
+  limit: 6
+  date_type: created
+
+# 侧边栏
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true
+  position: right
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_author:
+    enable: true
+    description: 一个在读计算机的普通人，跑跑步，写点代码。
+    button:
+      enable: true
+      icon: fab fa-github
+      text: Follow Me
+      link: https://github.com/abel-chai
+  card_announcement:
+    enable: true
+    content: This is my Blog
+  card_recent_post:
+    enable: true
+    limit: 5
+    sort: date
+    sort_order:
+  card_categories:
+    enable: true
+    limit: 8
+    sort: length
+    sort_order:
+  card_tags:
+    enable: true
+    limit: 40
+    color: false
+    orderby: random
+    order: 1
+  card_archives:
+    enable: true
+    type: monthly
+    format: MMMM YYYY
+    sort_order: -1
+    limit: 8
+  card_webinfo:
+    enable: true
+    post_count: true
+    last_push_date: true
+    runtime:
+      enable: false
+      launch_time: '01/01/2020 00:00:00'
+      work_day: true
+
+# 页脚
+footer:
+  nav:
+  owner:
+    enable: true
+    since: 2020
+    custom_text:
+    copyright: false
+  custom_text:
+  theme_copyright: true
+
+# 搜索
+search:
+  use: local_search
+  placeholder: 搜索文章…
+  local_search:
+    preload: true
+    trigger: auto
+    top_n_per_article: 1
+    unescape: false
+
+# 评论
+comments:
+  use: Gitalk
+  text: true
+  lazyload: true
+  count: true
+  gitalk:
+    client_id: 2f351c79f7a24bb29ce3
+    client_secret: 8b5ee3f40a55899c926a7825ce4f6040ed3eaf51
+    repo: abel-chai.github.io
+    owner: abel-chai
+    admin: abel-chai
+    option:
+
+# 字体与颜色
+font:
+  global_font_size: 16px
+  code_font_size: 0.875em
+
+# 夜间模式
+darkmode:
+  enable: true
+  button: true
+  autoChangeMode: false
+  start:
+  end:
+
+# 阅读进度
+readmode: true
+
+# 背景特效（与原站一致）
+canvas_nest:
+  enable: true
+  color: '0,0,255'
+  opacity: 0.7
+  zIndex: -1
+  count: 99
+  mobile: false
+
+activate_power_mode:
+  enable: true
+  colorful: true
+  shake: true
+  mobile: false
+
+click_show_text:
+  enable: true
+  text: 富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善
+  mobile: false
+
+# 标签页样式
+tag_style: blur
+
+# 归档/分类/标签页
+archive:
+  subtitle:
+
+# 文章版权
+post_copyright:
+  enable: true
+  decode: false
+  author_href:
+  license: CC BY-NC-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+# 数学公式（按需开）
+math:
+  enable: false
+
+# 404
+error_404:
+  enable: true
+  subtitle: '页面没有找到'
+  background: /img/404.jpg
