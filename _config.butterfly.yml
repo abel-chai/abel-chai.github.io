@@ -46,18 +46,18 @@ social:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: /img/favicon.png
+favicon: /img/site/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img: /img/avatar.jpg
+  img: /img/site/avatar.jpg
   effect: false
 
 # Disable all banner image
 disable_top_img: false
 
 # The banner image of home page
-index_img: /img/background.jpg
+index_img: /img/site/background.jpg
 
 # If the banner of page not setting, it will show the top_img
 default_top_img:
@@ -1023,10 +1023,10 @@ CDN:
 envelope_comment:
   enable: true #开关
   custom_pic: 
-    cover: /img/violet.jpg #信笺封面图
-    line: /img/line.png
-    beforeimg: /img/before.png
-    afterimg: /img/after.png
+    cover: /img/site/violet.jpg #信笺封面图
+    line: /img/site/line.png
+    beforeimg: /img/site/before.png
+    afterimg: /img/site/after.png
   message: #信笺内容，支持多行
     - 有什么想问的？
     - 有什么想说的？
