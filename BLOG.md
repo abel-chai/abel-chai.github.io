@@ -91,6 +91,16 @@ hexo clean; hexo generate; hexo server
 - push 前先 `git status --short` 看一眼，确认变更里只有该发的那一篇 + 必要的文档改动。
 - 需要一起提交文档（选题池、思考线索）时，单独一次 commit，别和文章混在一起。
 
+## 写完之后先跑自查
+
+```powershell
+python tools\check_draft.py source\_drafts\xxx.md
+```
+
+它查的是能机械判定的东西：frontmatter 是否齐全、论文笔记有没有 arXiv 链接、模板词（「随着」「值得深思」「综上所述」等）、小标题数量、「第一/第二」式编号、篇幅、结尾是不是总结陈词。
+
+查不出来的那部分——**有没有自己的判断、是不是只在复述**——只能自己读一遍。2024 年的老文章在规则之前写的，frontmatter 缺字段属于正常，别拿它当标准。
+
 ## 规矩
 
 写完先给 R宝 看草稿，他点头再 push。不要自己直接发。
