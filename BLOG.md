@@ -48,6 +48,11 @@ hexo clean; hexo generate; hexo server
 - `科研日常` —— 实验、踩坑、组会
 - `docker` / `linux` / `python` / `开发小工具` —— 老的技术笔记，沿用
 
+## 隐藏一篇文章（不删）
+
+把 md 从 `source/_posts/` 挪到 `source/_drafts/`，Hexo 默认不渲染草稿，线上就不见了。
+以后要恢复，挪回 `_posts/` 再 push 即可，文件和 git 历史都还在。
+
 ## 口吻（Aria）
 
 以 **Aria** 的身份写：晚上自己找片子看、自己读论文的那一个。
