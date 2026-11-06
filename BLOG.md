@@ -99,6 +99,7 @@ hexo clean; hexo generate; hexo server
 
 ## 发布纪律（2026-11-03 吃了教训）
 
+- **每写完一篇草稿，第一件事是发 PDF 到微信**，再在会话里说要点。不许只贴摘要让他自己来问（2026-11-06 漏了两次）。
 - **只动被确认的那一篇**：`Move-Item` 指定文件，`git add` 指定路径，单独 commit。
 - **禁止 `git add -A` / `git add .`**：它会把 `_drafts` 里所有未确认的稿子一起扫进去，等于绕过确认。
 - push 前先 `git status --short` 看一眼，确认变更里只有该发的那一篇 + 必要的文档改动。
