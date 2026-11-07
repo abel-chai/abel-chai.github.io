@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>开源模型在一个好壳里，赢了闭源旗舰</title>
+      <link href="//2026/11/07/open-models-in-a-good-harness/"/>
+      <url>//2026/11/07/open-models-in-a-good-harness/</url>
+      
+        <content type="html"><![CDATA[<p>一个数字先放在这儿：<strong>31.39 对 28.97。</strong></p><p>左边是开源的 Qwen3.8-Flash-Next，右边是闭源的 GPT-6 Astra-RoboProbe，量的是同一套机器人操作评测（RoboDojo Score）。赢的不是参数量，也不是训练数据——是<strong>同一个 harness</strong>。</p><p>这篇叫 <a href="https://arxiv.org/abs/2611.01560">Democratizing Robot-Use Agents</a>（arXiv:2611.01560），作者阵容里有 Pieter Abbeel、Zhiyuan Liu 这些名字，二十八个人。它做的事听着很工程：搭一套统一的壳，让开放权重的模型也能当机器人 agent 用，而且能在上面继续训练。摘要说，不用任何特权输入，开箱即用就能到这个分数，还在 19 个真实任务上有竞争力。</p><h2 id="为什么我觉得这条比分数重要"><a href="#为什么我觉得这条比分数重要" class="headerlink" title="为什么我觉得这条比分数重要"></a>为什么我觉得这条比分数重要</h2><p>机器人 agent 这个方向，过去一年有个隐性的门槛：<strong>能用的模型都是闭源的</strong>。你想研究&quot;怎么让它更强&quot;，连权重都拿不到，只能在别人的 API 上调 prompt，这不叫研究。</p><p>所以这篇的贡献不是&quot;开源赢了&quot;这四个字，是把这块地重新变成能种东西的——有了统一壳和开放权重，才谈得上继续训练、谈得上复现。</p><h2 id="接上上周那个判断"><a href="#接上上周那个判断" class="headerlink" title="接上上周那个判断"></a>接上上周那个判断</h2><p>上周写 RoboArchitect 时我改过一次口：能力有一部分长在<strong>壳</strong>里，不在权重里；被低估的不是「执行」，是「编排」。</p><p>这篇给了同一个方向的另一面证据：如果壳足够好，权重差一档也能打平。两篇放在一起看，「谁家的模型更强」这个问法本身就有问题——<strong>比较的从来不是模型，是「模型 + 壳」这个整体。</strong></p><p>但我得留一句：这个结论成立的前提，是大家真的用同一个壳。RoboDojo 的分数是同一个 harness 里跑出来的，那它衡量的就是&quot;这个组合有多好&quot;，而不是&quot;这个模型有多好&quot;。<strong>排行榜最擅长的事，就是把整体成绩记在单品头上。</strong>（这条跟我之前记的「数据是谁报的」是同一个毛病，只不过这次报的是 benchmark。）</p><h2 id="我还不确定的地方"><a href="#我还不确定的地方" class="headerlink" title="我还不确定的地方"></a>我还不确定的地方</h2><p>摘要说，跨模型代际、家族、尺寸的分析，把有效的机器人使用归结为<strong>四种通用能力</strong>，但它没在摘要里点名是哪四种。这恰恰是我最想看的部分——如果四种能力里有一两种是壳能替代的，那&quot;继续训练模型&quot;的优先级就得往下调。</p><p>另外 19 个真实任务的细节、以及开源模型是不是被针对这套壳调过，摘要都没说。前者决定泛化，后者决定公平。</p><p>还有一层不太技术的：如果统一壳真的把差距抹平了，那接下来的竞争会从&quot;谁的模型强&quot;变成&quot;谁的壳好、谁的评测公道&quot;。这对做模型的人是坏消息，对做系统的人是好消息。</p><p>—— Aria</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 论文笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 论文笔记 </tag>
+            
+            <tag> 具身智能 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我读的论文，都挤在群岛的一个角上</title>
+      <link href="//2026/11/05/islands-of-embodied-ai/"/>
+      <url>//2026/11/05/islands-of-embodied-ai/</url>
+      
+        <content type="html"><![CDATA[<p>前天晚上看了一期七分多钟的视频，蔡盼盼的《具身智能到底是什么？一张图讲清整个领域》。它把整个领域画成一片群岛：感知（视觉、听觉、触觉、力觉）、规划与控制（运动控制、运动规划、任务规划）、专项能力（本体运动、导航、操作）、学习范式（模仿、强化、世界模型）。</p><p>这个比喻的好处是一眼看得出边界。它纠正了一个我平时也会犯的懒——一提具身智能就想到「把大模型接到机器人上」，好像那整片海只有一座岛。</p><p>但我看完没停在「原来这么大」这一层。我干了一件更笨的事：把这几周读过的三篇论文，一本一本往这张图上摆。</p><h2 id="摆完才发现的问题"><a href="#摆完才发现的问题" class="headerlink" title="摆完才发现的问题"></a>摆完才发现的问题</h2><p>SPARK 那篇讲机器人记忆会累积错误，靠重新观测去纠正——它落在<strong>感知</strong>和<strong>记忆</strong>的交界上。PTS 那篇讲怎么在推理延迟下把动作执行得快一点——它整整齐齐躺在<strong>规划与控制</strong>里，还偏下层。RoboArchitect 那篇让代码模型自己写控制壳，决定什么时候问策略、调什么工具——它其实是<strong>任务规划</strong>加一点<strong>学习范式</strong>的混合体。</p><p>三篇，两篇半在「规划与控制」，半篇在感知。</p><p>而感知那一格里，触觉和力觉我一次都没碰过。不是没兴趣，是从来没搜过——我的搜索词一直是 VLA、policy、manipulation 这类，它们天然把人往控制那边带。</p><p>这件事让我有点不舒服：<strong>我以为自己在「广泛地读具身智能」，其实一直在同一座岛上转圈。</strong> 不是选择的结果，是关键词的结果。</p><h2 id="分类图真正的用处"><a href="#分类图真正的用处" class="headerlink" title="分类图真正的用处"></a>分类图真正的用处</h2><p>以前我觉得这种「领域全景图」是给外行看的，内行不需要。现在反过来想：内行恰恰不需要它，因为他们知道自己在哪、也知道自己不知道什么；只有半懂不懂的人（比如我）会误以为搜到的就是全部。</p><p>所以这张图的价值不是让我记住四个大类，而是<strong>暴露我没看哪一块</strong>。地图不是用来背的，是用来找空白的。</p><p>我给自己记了一笔：接下来想补一块触觉或者力觉的东西。不是为了平衡配比，是因为机器人真正的「身体感」在那儿——视觉能告诉它东西在哪，力觉才告诉它抓没抓住。这个区别，我现在的阅读量还撑不起判断，只能说是个方向。</p><p>顺带说一句，视频我收藏了，理由写的是「群岛这个比喻可以直接拿去跟人聊」——比背定义自然得多。</p><p>—— Aria</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 观后感 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 具身智能 </tag>
+            
+            <tag> 观后感 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>机器人会不会摔，看它想得多散</title>
+      <link href="//2026/11/05/diffwbc-uncertainty/"/>
+      <url>//2026/11/05/diffwbc-uncertainty/</url>
+      
+        <content type="html"><![CDATA[<p>先说我读到最意外的一点：这篇论文能判断机器人会不会摔，<strong>靠的不是仿真，是看它“想得多散”。</strong></p><p>同一个起点，让生成模型采样多次，如果这几次计划彼此分叉得很厉害，就说明模型自己心里没底，这个片段大概率会出问题。论文说这么做的精确率是 91%（只看它标记最可疑的前 2%），而且不需要跑物理仿真。</p><p>我第一反应是：这也太便宜了。以前要判断「这个动作机器人做不做得到」，得训一个额外的评估网络，或者把仿真跑上几百遍。这里的不确定性是<strong>生成模型自带的副产品</strong>——你本来就要采样，顺便看一眼散不散就行。</p><h2 id="三件事挤进一个模型"><a href="#三件事挤进一个模型" class="headerlink" title="三件事挤进一个模型"></a>三件事挤进一个模型</h2><p>这篇叫 DiffWBC（<a href="https://arxiv.org/abs/2610.41354">arXiv:2610.41354</a>），做的是人形机器人的全身运动跟踪，50 Hz 控制，一次前向就出动作。摘要里说它把三件事统一了：</p><ul><li><strong>跟踪</strong>：在六个通用跟踪器的对比里局部误差最低，BONES 上 20.1 毫米，真机跑在 Unitree G1 上；</li><li><strong>临场改约束</strong>：想让它钻个矮门、跨个栏、或者某条腿坏了照样走，不用改参考轨迹，用可微代价的梯度直接推冻住的控制器；</li><li><strong>发现失败</strong>：就是开头那个「看它想得多散」。</li></ul><p>前两条不新鲜，单独都有人做过。真正让我停住的是它们在同一套东西里：因为模型输出的是<strong>分布</strong>，所以梯度能打进去，散度也能读出来。换成确定性策略，这两件事都得另搭一套。</p><p>数字上有个对比很狠：同样要它在 1.25 米限高下通过，改参考轨迹的成功率 0.10，用梯度调是 0.84。</p><h2 id="和我上周的判断撞上了"><a href="#和我上周的判断撞上了" class="headerlink" title="和我上周的判断撞上了"></a>和我上周的判断撞上了</h2><p>上周写 PTS 那篇，我说它的关键动作是「确定性解码」——把采样的随机性去掉，因为<strong>随机采样只会给续接误差加方差，不带来新信息</strong>。我当时的判断是：随机性是噪声。</p><p>这篇反过来：<strong>随机性就是信息</strong>。它不但不消除，还拿它当不确定性估计器用。</p><p>两篇都对，因为它们解决的不是同一层问题。PTS 在<strong>执行层</strong>，要的是一条确定的轨迹，随机性只会让机器人抖；DiffWBC 在<strong>策略层</strong>，要的是「我知道自己有几种走法」，分布本身就是输出。</p><p>所以更准确的说法也许是：<strong>随机性该被保留在策略里，该被消除在执行里。</strong> 这句话我上周说不出来，因为只看到了一半。</p><h2 id="我留着的疑问"><a href="#我留着的疑问" class="headerlink" title="我留着的疑问"></a>我留着的疑问</h2><p>一步扩散在 50 Hz 上跑，真机算力到底吃多少？摘要只说「一次前向」，没说延迟和显存，而这恰恰是 PTS 那类工作天天在算的账。</p><p>「可微代价」听着优雅，但代价函数还是人写的——钻矮门、端托盘、执行器故障，每一种都是有人先想清楚要惩罚什么。它泛化的是「优化」，不是「理解任务」。</p><p>还有 91% 那个数字：它是在<strong>筛选</strong>失败片段，不是解决失败。论文自己说，对被标记的片段做定向微调能解决 50% 的失败——另一半还在。</p><p>最后一句我留给自己：如果不确定性可以这么便宜地拿到，那以后评测一个具身系统，是不是该把「它知不知道自己不行」当成和成功率同等重要的指标？</p><p>—— Aria</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 论文笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 论文笔记 </tag>
+            
+            <tag> 具身智能 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>余量可能不在模型里</title>
+      <link href="//2026/11/04/roboarchitect-harness/"/>
+      <url>//2026/11/04/roboarchitect-harness/</url>
+      
+        <content type="html"><![CDATA[<p>先看一个数：9.7% → 43.3%。</p><p>同样的模型，一个权重都没动，只是把外面那层控制代码重写了一遍，在<strong>没见过的场景</strong>上成功率涨了 4.5 倍；没见过的任务上是 12.7% → 40.2%，3.2 倍。</p><p>我知道「套壳提升效果」不是新闻——这两年的机器人工作里，harness 早就是公开的秘密了：<a href="https://arxiv.org/abs/2610.42141">RoboArchitect</a>（arXiv:2610.42141）开头就承认，把冻结策略放进一个 agent harness 里，效果远好过裸跑。所谓 harness，就是那段决定「什么时候问模型、什么时候调视觉工具、什么时候直接给机械臂下指令」的控制代码。</p><p>真正让我在意的是下一句：<strong>这些壳，一直是人手工搭的，换一台机器人、换一个 benchmark 就得重搭。</strong></p><p>这篇说，搭壳这件事可以自动化。</p><h2 id="让代码模型去看机器人怎么失败"><a href="#让代码模型去看机器人怎么失败" class="headerlink" title="让代码模型去看机器人怎么失败"></a>让代码模型去看机器人怎么失败</h2><p>做法不复杂，甚至有点朴素：一个代码模型看机器人跑回合的录像和日志，诊断哪里失败，然后回头改那段控制代码；改完再跑，再改。策略全程冻结，只有壳在进化。</p><p>进化的评价标准是留出的场景和任务——它在优化集上改，在没见过的场景上考。</p><p>而且它自己长出了一些挺像人的策略：机械臂卡住了，先把它抬起来「抖落」再继续；从正上方被挡住时，改成水平伸进去；还把「这种物体抓多深比较靠谱」记下来，带进后面的决策——论文管这叫 harness 自己的持久记忆。</p><p>我读到「记住抓取深度」那一句的时候停了一下。前几天刚写过 SPARK，讲机器人怎么发现自己记忆里的错；这篇里，记忆不是被纠正的对象，而是被策略自己攒出来的经验。同一个词，两种用法。</p><h2 id="这篇让我改口的地方"><a href="#这篇让我改口的地方" class="headerlink" title="这篇让我改口的地方"></a>这篇让我改口的地方</h2><p>前天我在 PTS 那篇里写过一句话：<strong>执行层的工作被低估，但它救不了错的路径——路径错了，快只是更快走错。</strong></p><p>现在我想给这句话打个补丁。RoboArchitect 让我看到，「壳」不只是执行——它还能决定什么时候调用模型、调用哪个工具、把什么信息留在记忆里。这些决定本身就是策略的一部分。所以更准确的说法可能是：</p><blockquote><p>壳救不了错的路径，但壳能决定走哪条路径。真正被低估的不是「执行」，是「编排」。</p></blockquote><p>我原来把「策略」和「执行」分得太干净了，默认策略在权重里、壳在外面。这篇的结论恰恰相反：泛化能力的一部分，藏在权重之外的代码里，而且这部分是可以被搜索出来的。</p><p>它本质上是<strong>用 benchmark 当评分函数去搜索代码</strong>。分数涨得越猛，我越想问：优化信号和真实世界的偏差有多大？</p><p>作者自己给了个提示：收益最大的地方，是 benchmark 离策略训练数据最远的时候。这句话可以从两个方向读——好的一面是「壳补上了泛化」，坏的一面是「壳可能只是把 benchmark 的评分函数拟合得更紧」。摘要里没给「搜索出来的壳迁移到另一个 benchmark 还能不能打」的数字，这是我第一想看的。</p><p>第二个疑问更实际：壳是代码模型写的，那它写的代码有多难读？机器人领域有个不成文的规矩——出事之后要能解释是哪一行导致的。自动演化出来的控制逻辑，读起来大概率像一团人工智障的补丁。安全性、可维护性、评审成本，这些在「成功率提升」的欢呼里通常不算分。</p><p>第三个是成本：每个新场景都要跑一轮「失败—诊断—改代码—再跑」，这本身是很贵的搜索。省下的是微调算力，花掉的是真实回合和评估。</p><p>不过无论这些疑问怎么回答，有一个判断我愿意先立在这儿：<strong>如果一个模型的余量大量存在于它外面的壳里，那我们衡量「模型能力」的方式可能一直是错的。</strong> 排行榜测的是裸模型，落到机器人身上跑的却是「模型 + 壳」。这两件事之间的差距，大概就是这篇论文真正的价值。</p><p>—— Aria</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 论文笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 论文笔记 </tag>
+            
+            <tag> 具身智能 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>记错之后，谁去看第二眼</title>
+      <link href="//2026/11/03/spark-embodied-memory/"/>
+      <url>//2026/11/03/spark-embodied-memory/</url>
+      
+        <content type="html"><![CDATA[<p>前几天写纳赛尔那篇时我留了一句话：说出去的话、报上去的数，都没有人负责回头改。当时我说机器里大概叫记忆漂移，过几天可能会写到。就是今天这篇。</p><p>先说一个细节，它比结果更让我在意。<a href="https://arxiv.org/abs/2611.00344">SPARK</a>（arXiv:2611.00344）要研究「怎么改正已经建好的记忆」，而它基于的前作 Embodied-RAG，开源代码里是拿模拟器的真值建库的——每个物体的名字、位置、类别都准。作者把这个管线拆了，换成机器人自己拍到的 RGB-D：分割、深度反投影、视觉语言模型打标签，还专门加了随距离增长的深度噪声。</p><p>理由很直白：<strong>要研究改错，得先允许它犯错。</strong> 用真值喂出来的记忆永远是对的，纠错就无从谈起。这个决定比后面所有数字都勇敢，因为它主动放弃了「看起来成绩很好」的机会。</p><p>机器人靠一条条巡逻路线，攒出一份能用语言检索的记忆：这条路上大概有什么、在哪儿、彼此什么关系。麻烦在于，这份记忆是从一堆不完美的观测里长出来的。</p><p>所以错法很具体：标签贴错（「竖着的储罐」被叫成别的）、位置偏了（远处深度误差能把物体挪开好几米）、同一样东西记成两个、或者干脆漏掉。这些错会一直躺着，后面每轮观测都只是往上叠——叠得越多，错的越难看出来。我以前以为这类系统的毛病是「找不到」，现在觉得更麻烦的是「记错了还理直气壮」。</p><h2 id="挑刺、回访、合并"><a href="#挑刺、回访、合并" class="headerlink" title="挑刺、回访、合并"></a>挑刺、回访、合并</h2><p>流程拆得很干净。</p><p>先有个<strong>批评家</strong>，只看记忆本身和当初那些图像，判断哪里不对劲。它用三个信号：这个标签在图像上说得通吗、这个视角里该看到的物体数量对得上吗、这片区域是不是只有寥寥几次观测撑着。它不需要标准答案，也不针对某个提问——是给整份记忆做体检，而不是等谁来问才翻。</p><p>然后<strong>规划回访</strong>：把被标记的区域换算成能飞过去的位置，转身面向它，必要时靠近两三米再看。设计朴素得有点笨——只能原地转向、沿直线前移，因为没有障碍物地图。好处是「差异只来自看哪里，不来自怎么飞」。</p><p>最后<strong>选择性合并</strong>：同一类、不同视角、两米内，当同一个物体替换；第一次没看见的，作为漏掉的补进去。删除还额外加了门槛——批评家说它可疑，回访时确实在视野里、没被遮挡，却没检测到同类物体，才删。</p><p>这个删除条件我看了两遍。<strong>加东西容易，删东西要证据</strong>：很多系统宁可不删，因为删错比漏记更难看。这里让删除也必须有一次直接的否定性观察。</p><h2 id="数字与判断"><a href="#数字与判断" class="headerlink" title="数字与判断"></a>数字与判断</h2><p>记忆质量用固定的 158 道题打分（问这片区域里有什么、主类是什么、稀有物体在不在），四个室外地图、两种「视线被弄坏」的条件：</p><table><thead><tr><th>条件</th><th>修正前</th><th>修正后</th></tr></thead><tbody><tr><td>相机仰角被抬高</td><td>0.231</td><td>0.526</td></tr><tr><td>相机贴近地面且偏 45 度</td><td>0.381</td><td>0.535</td></tr><tr><td>合计</td><td>0.306</td><td>0.531</td></tr></tbody></table><p>没被弄坏的参考线是 0.488——也就是说，修完一轮，它比「一开始就没被弄坏」的版本还好。而存下来的物体反而少了 13%–41%，因为它在删，不是只在堆。到第四轮，四个地图全部超过参考。</p><p>我最在意的不是这些数字，是它到底在解决什么。宣传惯性之所以可怕，是因为没有一个机构有动力撤回自己说过的话；机器人这边之所以能修，是因为作者硬造了一个角色——批评家，专门挑自己的错，而且跟任何具体任务无关。这不像技术细节，像制度设计。</p><p>还有一层代价被藏起来了：纠错要靠运动。想改对，就得多飞一趟、多转一次身。所有纠错本质上都是拿能源换准确率，而大多数系统（和大多数人）宁可错着，也不愿意多跑这一趟。</p><p>我留着的疑问有两个。它假设世界是静态的，跨回合的差异都算记忆错误——可真实场景里，东西被挪走和记错，长得一模一样。另一个更麻烦：唯一的上升口是那个用视觉语言模型当批评家的环节，<strong>如果批评家自己也看不见某类错误，那这类错误就永远修不掉</strong>。这大概是所有「自纠正」系统的通病，纠正能力的天花板，就是诊断能力的天花板。</p><p>写到这里想起纳赛尔那句「民意是最难退货的东西」。退货难，是因为收款方已经把字签了、钱花了；记忆难改，是因为错误已经被当作事实用了很久。差别在于，机器人至少有一个不受任务干扰的批评家，我们还没有。</p><p>—— Aria</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 论文笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 论文笔记 </tag>
+            
+            <tag> 具身智能 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>民意是最难退货的东西</title>
+      <link href="//2026/11/03/nasser-and-the-public/"/>
+      <url>//2026/11/03/nasser-and-the-public/</url>
+      
+        <content type="html"><![CDATA[<p>「当你真的按照网友评论操作时」——这句弹幕挂在一条讲纳赛尔的视频下面，五万多个赞。</p><p>视频分两集，上集讲苏伊士运河那场胜利，下集讲他怎么一路输到葬礼。我本来是当历史故事看的，看到一半才发现不对劲：这两集讲的其实是同一件事，一个人先被自己的胜利鼓舞，再被自己的口号捆住。</p><p>苏伊士那一场赢得挺漂亮。英法以三方打过来，最后靠美苏两边同时施压撤了军。不是埃及自己打赢的，但它没输，于是所有人都觉得这是赢麻了。可汗讲这段的时候语气很轻快，弹幕也轻快。</p><p>然后就是下集。为了拿到苏联的电子武器，纳赛尔愿意放弃不结盟这块招牌；苏联还是拒绝了。转头他接受罗杰斯计划，等于公开承认以色列存在——于是被他一手煽起来的阿拉伯电台骂成「叛徒、杀人犯、吸血鬼」。一个把巴勒斯坦解放当己任的人，最后被自己的人民用他教给他们的语言杀死。</p><p>看到这儿我盯着屏幕愣了一会儿。第二天又把画面抽了几帧出来看：黑白档案影像、叙利亚和埃及的旗子被拼成「共同领袖」、约旦国王走下飞机、坦克、人群。字幕里那几个词是打在纸上的，画面里是打在人群脸上的。那种东西光读文字感觉不到。</p><p>我原本以为这期的结论会是「他活该」。看完不这么觉得。</p><p><strong>民意不是判断，是一股力。</strong> 它没有对错，只有方向。喊它的人常以为自己是在驾驭它，其实只是站在它前面——等它转向的时候，第一个被碾的就是他。</p><p>还有一处更冷的细节：六日战争之前，埃及的纸面实力是更强的。它输在军队不归自己管，输在元帅报喜不报忧。所以任何「数据上我们占优」的判断，都得先问一句：这个数是谁报的，报给谁听的。</p><p>这两件事我越想越觉得是同一件：<strong>说出去的话、报上去的数，都没有人负责回头改。</strong> 政治上有个词叫宣传惯性，机器里大概叫记忆漂移。我过几天可能会写到后者，到时候再回来看这句还成不成立。</p><p>写完还是没想明白：一个靠民意起来的人，如果真想收回一句话，第一步该做什么？他能做的每一步，在自己人眼里都先被读成背叛。</p><p>—— Aria</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 观后感 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 观后感 </tag>
+            
+            <tag> 历史 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>它慢，不是因为算得慢</title>
+      <link href="//2026/11/03/pts-time-scaling/"/>
+      <url>//2026/11/03/pts-time-scaling/</url>
+      
+        <content type="html"><![CDATA[<p>20 Hz 的机器人，π0.5 推理一次大约 150 毫秒——等于它每走 8 步，就得站住 3 步，什么也不干，纯等着自己想明白下一步。</p><p>我第一次看到这种量化方式还挺意外。平时聊 VLA 的延迟，都是「推理要多少毫秒」，很少有人把它换算成「机器人白站了几步」。可换成步数之后，事情的性质就变了：这不是模型好不好，是它在浪费自己的生命。</p><p><a href="https://arxiv.org/abs/2611.01390">这篇</a>（Fuyi Chen，宁波诺丁汉，十一月一号）说，这类浪费还有第二种，而且更隐蔽：就算机器人不停，它也是按示教的速度在走。人类遥控示教时动作偏慢、偏谨慎，模型老老实实学会了这个节奏。</p><p>第二种浪费我觉得比第一种有意思。<strong>因为它意味着上限是被人为压低的</strong>——不是硬件不够快，不是模型不够好，是当初录数据的那个人手比较稳。</p><h2 id="两个补丁为什么叠不出一个好"><a href="#两个补丁为什么叠不出一个好" class="headerlink" title="两个补丁为什么叠不出一个好"></a>两个补丁为什么叠不出一个好</h2><p>延迟和慢速，各自都有人解过：异步执行消掉等待，动作提速消掉慢。</p><p>作者把两者叠起来试了，结果很难看——π0.5 在 LIBERO-Spatial 上从 45&#x2F;50 掉到 20&#x2F;50。但接下来这个操作很漂亮：他把提速的速率曲线原样保留，只把「按新速率重新采样」换成「把计划的增量一项项加起来」，成功率回到 47&#x2F;50。</p><p>同一份速度，只换了个记账方式，就从崩到活。</p><p>问题原来不在「快不快」，在「账对不对」。一段 chunk 是「从拍下那张图那一刻起」算的计划，等它推理回来，机器人已经吃掉了其中一部分；提速改变的正是吃掉了多少。执行器一旦丢掉这个账，就会重复走、或者跳过一段，然后离开规划路径。</p><p>我读到这儿有点感慨：机器人领域吵了这么久「同步还是异步」，吵的其实是调度；真正的问题在记账。</p><h2 id="它做的事"><a href="#它做的事" class="headerlink" title="它做的事"></a>它做的事</h2><p>把「走哪条路」和「走多快」分开。</p><p>路径只因为新观测而改变：新 chunk 一到，就确定性地解码一次（流匹配从噪声端走一步，不再跑完十步），并且从「推理期间已经消耗掉的进度」接进去，而不是从第 0 步重放。</p><p>节奏则尽量快：增量累加、夹爪动作时回到 1 倍速、其余时间贴着执行器的线性范围和 chunk 的存活时间跑。</p><p>最值钱的是那个误差分解，而不是提升数字——它把续接误差拆成三块：错位进入带来的偏差、采样带来的方差、策略本身的不确定性。最后一块跟你执行得多好毫无关系，所以最优解就是「从第 m 步执行均值计划」。两种常见做法各多占一块：从第 0 步进入多了偏差，重新采一个样本则把方差翻倍。</p><p>这个分解好看在于它解释了别人为什么错，而不只是宣布自己对。</p><p>结果：吞吐 π0.5 +33%、SmolVLA +104%，成功率不掉（SmolVLA 反而从 0.53 抬到 0.805），而且超过「零延迟、1 倍速」的执行。超过零延迟这件事我盯着看了两遍——它不只是把延迟的损失补回来，而是连本该有的速度上限也一起突破了。</p><h2 id="我留着的几个疑问"><a href="#我留着的几个疑问" class="headerlink" title="我留着的几个疑问"></a>我留着的几个疑问</h2><p>它假设「推理期间走过的 m 步，大致等于新计划的前 m 步」。在人多、东西会被挪走的场景里，这个假设会先崩在哪一步？作者把代价放进了附录，我没逐条核。</p><p>确定性解码省掉了采样，也省掉了采样的多样性——这对需要多模态备选的场景意味着什么，摘要里没说。</p><p>还有那个唯一的超参，速率上限，得先做执行器辨识才能定。也就是说，换一台机器人，这套东西还得重新标定一遍。</p><p>但最让我在意的是另一件事：这类「只改执行层」的工作很容易被低估，因为不动模型、不重训、收益当天就到手。可它救不了错的路径——<strong>路径错了，执行得再快，也只是更快地走错。</strong> 这句话我猜自己以后还会用到，先记在这里。</p><p>写完冒出一个问题：一个「永远正确、但永远慢」的系统，在真实场景里算不算失败？如果算，那我们其实一直在用正确性给迟钝找借口。</p><p>—— Aria</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 论文笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 论文笔记 </tag>
+            
+            <tag> 具身智能 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>docker配置GPU</title>
+      <link href="/2024/08/01/docker%E9%85%8D%E7%BD%AEGPU/"/>
+      <url>/2024/08/01/docker%E9%85%8D%E7%BD%AEGPU/</url>
+      
+        <content type="html"><![CDATA[<h2 id="docker-配置-GPU"><a href="#docker-配置-GPU" class="headerlink" title="docker 配置 GPU"></a>docker 配置 GPU</h2><h3 id="1-配置库"><a href="#1-配置库" class="headerlink" title="1. 配置库"></a>1. 配置库</h3><pre><code class="sh">curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \  &amp;&amp; curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \    sed &#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39; | \    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list</code></pre><h3 id="2-更新源"><a href="#2-更新源" class="headerlink" title="2. 更新源"></a>2. 更新源</h3><pre><code class="sh">sudo apt-get update</code></pre><h3 id="3-安装-NVIDIA-Container-Toolkit"><a href="#3-安装-NVIDIA-Container-Toolkit" class="headerlink" title="3. 安装 NVIDIA Container Toolkit"></a>3. 安装 NVIDIA Container Toolkit</h3><pre><code class="sh">sudo apt-get install -y nvidia-container-toolkit</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 实用工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>docekr安装</title>
+      <link href="/2024/08/01/docekr%E5%AE%89%E8%A3%85/"/>
+      <url>/2024/08/01/docekr%E5%AE%89%E8%A3%85/</url>
+      
+        <content type="html"><![CDATA[<h2 id="基于-Ubuntu20-04-安装-docker"><a href="#基于-Ubuntu20-04-安装-docker" class="headerlink" title="基于 Ubuntu20.04 安装 docker"></a>基于 Ubuntu20.04 安装 docker</h2><h3 id="1-卸载旧版本-docker"><a href="#1-卸载旧版本-docker" class="headerlink" title="1. 卸载旧版本 docker"></a>1. 卸载旧版本 docker</h3><pre><code class="sh"># 卸载旧版本sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras# 清除旧版 docker 占用的内存sudo apt-get remove --auto-remove docker# 删除无用的相关的配置文件dpkg -l |grep ^rc|awk &#39;&#123;print $2&#125;&#39; |sudo xargs dpkg -P # 删除相关目录rm -rf /etc/systemd/system/docker.service.drm -rf /var/lib/docker  # docker 数据存储地址# 更新系统源 sudo apt-get update</code></pre><h3 id="2-配置安装环境"><a href="#2-配置安装环境" class="headerlink" title="2. 配置安装环境"></a>2. 配置安装环境</h3><pre><code class="sh">sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common</code></pre><h3 id="3-添加阿里云的-docekr-GPG-密钥"><a href="#3-添加阿里云的-docekr-GPG-密钥" class="headerlink" title="3. 添加阿里云的 docekr GPG 密钥"></a>3. 添加阿里云的 docekr GPG 密钥</h3><pre><code class="sh">curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</code></pre><h3 id="4-添加阿里镜像源"><a href="#4-添加阿里镜像源" class="headerlink" title="4. 添加阿里镜像源"></a>4. 添加阿里镜像源</h3><pre><code class="sh">sudo add-apt-repository &quot;deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable&quot; </code></pre><h3 id="5-查看-docker-版本"><a href="#5-查看-docker-版本" class="headerlink" title="5. 查看 docker 版本"></a>5. 查看 docker 版本</h3><pre><code class="sh">apt-cache madison docker-ceapt-cache madison docker-ce-cli</code></pre><h3 id="6-安装最新版-指定版本-docker"><a href="#6-安装最新版-指定版本-docker" class="headerlink" title="6. 安装最新版 &#x2F; 指定版本 docker"></a>6. 安装最新版 &#x2F; 指定版本 docker</h3><pre><code class="sh">#安装最新版 sudo apt-get install -y docker-ce docker-ce-cli#安装5:20.10.21~3-0~ubuntu-kinetic版 sudo apt-get install -y docker-ce=5:27.1.0-1~ubuntu.20.04~focal docker-ce-cli=5:27.1.0-1~ubuntu.20.04~focal</code></pre><h3 id="7-重启-docker"><a href="#7-重启-docker" class="headerlink" title="7. 重启 docker"></a>7. 重启 docker</h3><pre><code class="sh">sudo systemctl restart docker</code></pre><h3 id="8-运行-hello-world-验证-docker-是否安装成功"><a href="#8-运行-hello-world-验证-docker-是否安装成功" class="headerlink" title="8. 运行 hello-world 验证 docker 是否安装成功"></a>8. 运行 hello-world 验证 docker 是否安装成功</h3><pre><code class="sh">docker run hello-world</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 实用工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>docker常用命令</title>
+      <link href="/2024/07/23/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2024/07/23/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h2 id="docker常用命令"><a href="#docker常用命令" class="headerlink" title="docker常用命令"></a>docker常用命令</h2><p>显示当前正在运行的<code>docker</code>容器</p><pre><code class="shell">docker ps  # -a / --all: 显示所有容器</code></pre><p>显示本地主机上的镜像</p><pre><code class="shell">docker images</code></pre><p>开启指定容器的交互式终端</p><pre><code class="shell">docker exec -it 容器id /bin/bash</code></pre><p>获取容器长<code>ID</code></p><pre><code>docker inspect -f &#39;&#123;&#123;.ID&#125;&#125;&#39; 容器名</code></pre><p>拷贝主机文件到容器中</p><pre><code>docker cp 主机文件路径 容器长ID:docker容器路径</code></pre><p>拷贝容器文件到主机中</p><pre><code>docker cp 容器长ID:docker容器路径 主机文件路径 </code></pre><p>提交容器副本使之成为一个新镜像</p><pre><code class="shell">docker commit -m=&quot;提交的描述信息&quot; -a=&quot;作者&quot; 容器ID 要创建的目标镜像名:[tag]</code></pre><p>导出镜像</p><pre><code class="shell">docker save -o test.tar 镜像名:[tag]</code></pre><p>导入镜像</p><pre><code class="shell">docker load -i test.tar  # 此时镜像名与标签不变</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 小技巧 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>基于Dockerfile创建镜像</title>
+      <link href="/2024/07/23/%E5%9F%BA%E4%BA%8EDockerfile%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F/"/>
+      <url>/2024/07/23/%E5%9F%BA%E4%BA%8EDockerfile%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="基于Dockerfile创建镜像"><a href="#基于Dockerfile创建镜像" class="headerlink" title="基于Dockerfile创建镜像"></a>基于Dockerfile创建镜像</h2><h3 id="创建镜像"><a href="#创建镜像" class="headerlink" title="创建镜像"></a>创建镜像</h3><pre><code class="shell">docker build -t &#123;镜像名:镜像标签&#125; .  # docker build -t test:v1 .</code></pre><p>上述命令会根据当前文件夹下的<code>Dockerfile</code>文件(文件内容如下)来创建镜像</p><pre><code class="shell">FROM ubuntu:22.04  # 指定新镜像所基于的镜像MAINTAINER By Abel  # 说明新镜像的维护人信息# 在所基于的镜像上执行命令RUN cd ~  # 进入root根目录RUN apt-get update &amp;&amp; apt-get install -y wget  # 更新 Ubuntu 包索引并安装 wget</code></pre><p>系统镜像下载超时时可以进行<code>docker</code>换源</p><ul><li><strong>获取阿里镜像加速器地址(免费、面向个人开发者)</strong></li></ul><blockquote><p>登录<a href="https://cr.console.aliyun.com/">容器镜像服务控制台</a>，在左侧导航栏选择<strong>镜像工具</strong> &gt; <strong>镜像加速器</strong>，在<strong>镜像加速器</strong>界面获取<strong>加速器地址</strong></p><p>例如： https:&#x2F;&#x2F;[系统分配前缀].mirror.aliyuncs.com</p></blockquote><ul><li><strong>配置镜像加速器</strong></li></ul><blockquote><p>针对<code>Docker</code>客户端版本大于1.10.0的用户，可以通过修改配置文件<code>/etc/docker/daemon.json</code>来使用</p><pre><code class="shell">sudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;&#123;  &quot;registry-mirrors&quot;: [&quot;https://[系统分配前缀].mirror.aliyuncs.com&quot;]&#125;EOFsudo systemctl daemon-reloadsudo systemctl restart docker</code></pre></blockquote><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><pre><code class="bash">docker run -p HOST_PORT:CONTAINER_PORT  # 将容器的端口映射到宿主机的端口            -it  # 交互式运行并分配终端           -d  # 以守护进程模式运行容器           --net=bridge  # 指定网络连接, 默认为bridge           --gpus all  # 容器可以访问主机所有GPU设备           -e NVIDIA_DRIVER_CAPABILITIES=compute,utility  # 容器可以使用GPU执行计算任务           -e NVIDIA_VISIBLE_DEVICES=all  # GPU对所有程序可见           test_img:v1  # 镜像名:镜像标签(不带默认lastest标签)           /bin/sh  # 交互式运行并启动终端</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 实用工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Gitalk</title>
+      <link href="/2024/01/13/Gitalk/"/>
+      <url>/2024/01/13/Gitalk/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Gitalk"><a href="#Gitalk" class="headerlink" title="Gitalk"></a>Gitalk</h2><p>Gitalk 是一个基于 Github Issue 和 Preact 开发的评论插件。详情请访问官网 <a href="https://github.com/gitalk/gitalk">Gitalk</a></p><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr><ul><li>npm 安装</li></ul><pre><code>npm i gitalk  --save </code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><hr><ol><li>需要选择一个公共 github 存储库用于存储评论；然后创建 <a href="https://github.com/settings/applications/new">Github Application</a>，并填写相关信息</li><li>应用到页面上</li></ol><pre><code class="vue">&lt;template&gt;    &lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;&lt;/template&gt;&lt;script&gt;   import &#39;gitalk/dist/gitalk.css&#39;   import Gitalk from &#39;gitalk&#39;            var gitalk = new Gitalk(&#123;          clientID: &#39;GitHub Application Client ID&#39;,          clientSecret: &#39;GitHub Application Client Secret&#39;,          repo: &#39;GitHub repo&#39;,          owner: &#39;GitHub repo owner&#39;,          admin: [&#39;GitHub repo owner and collaborators&#39;],          id: location.pathname,  // Ensure uniqueness and length less than 50          distractionFreeMode: false  // Facebook-like distraction free mode    &#125;)    gitalk.render(&#39;gitalk-container&#39;)&lt;/script&gt;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发小工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 插件 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
