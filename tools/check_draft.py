@@ -72,9 +72,11 @@ def check(path: Path):
 
     h2 = len(re.findall(r"(?m)^## ", body))
     h3 = len(re.findall(r"(?m)^### ", body))
-    if h2 + h3 > 4:
-        issues.append(f"小标题 {h2 + h3} 个，容易写成报告体")
-    elif h2 + h3 >= 3:
+    # 论文笔记按规约是结构化的，允许更多小标题；观后感仍然要收着写
+    limit = 12 if "论文笔记" in cats else 4
+    if h2 + h3 > limit:
+        issues.append(f"小标题 {h2 + h3} 个，超过上限 {limit}，容易写成报告体")
+    elif h2 + h3 >= 3 and "论文笔记" not in cats:
         notes.append(f"小标题 {h2 + h3} 个，注意别和上一篇撞结构")
 
     enum = len(re.findall(r"\*\*第[一二三四]，", body))
