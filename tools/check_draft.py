@@ -81,6 +81,19 @@ def check(path: Path):
     if enum >= 2:
         issues.append("用了「第一/第二」式编号论证，准则不鼓励固定论证顺序")
 
+    # 论文笔记的额外要求（见 论文笔记规约.md）
+    if "论文笔记" in cats:
+        nums = re.findall(r"\d+(?:\.\d+)?\s*(?:%|倍|mm|ms|Hz|万|亿|个|次|维|参数)?", body)
+        nums = [n for n in nums if re.search(r"\d", n) and len(n.strip()) > 0]
+        # 去掉明显的年份、编号
+        real_nums = [n for n in nums if not re.fullmatch(r"\d{4}", n.strip())]
+        if len(set(real_nums)) < 3:
+            issues.append(f"论文笔记里具体数字只有 {len(set(real_nums))} 个，规约要求至少 3 个可核查的数字")
+        if not re.search(r"局限|保留|疑问|不确定|没给|存疑|可疑|没说明", body):
+            issues.append("没有保留意见：论文笔记必须写清楚哪里会崩、哪里没给")
+        if not re.search(r"作者|论文|摘要里|正文|实验", body):
+            notes.append("几乎没出现「论文说…」，注意把事实和推测分开")
+
     paras = [p.strip() for p in re.split(r"\n\s*\n", body) if p.strip()]
     if paras:
         last = paras[-1]
