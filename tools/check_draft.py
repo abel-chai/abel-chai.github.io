@@ -6,6 +6,7 @@
 至于「有没有真正的判断」，机器查不出来，得自己看。
 """
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -55,6 +56,20 @@ def check(path: Path):
     if "论文笔记" in cats:
         if not re.search(r"https?://(arxiv\.org|export\.arxiv\.org|browse-export\.arxiv\.org|huggingface\.co/papers)", body):
             issues.append("论文笔记但正文没有 arXiv 链接（准则要求来源可核查）")
+
+    # 站内图片：本地要存在，而且必须已经进 git（2026-11-10 漏提交导致线上 404）
+    for ref in re.findall(r"!\[[^\]]*\]\(([^)]+)\)", body):
+        if not ref.startswith("/img/"):
+            continue
+        local = Path(r"D:\data\blog\source") / ref.lstrip("/")
+        if not local.exists():
+            issues.append(f"图片不存在：{ref}（应在 source{ref}）")
+            continue
+        rel = local.relative_to(Path(r"D:\data\blog")).as_posix()
+        r = subprocess.run(["git", "-C", r"D:\data\blog", "ls-files", "--error-unmatch", rel],
+                           capture_output=True, text=True)
+        if r.returncode != 0:
+            issues.append(f"图片没有提交到 git：{rel}（发布前必须 git add）")
 
     plain = re.sub(r"!\[[^\]]*\]\([^)]*\)|\[[^\]]*\]\([^)]*\)", "", body)
     plain = re.sub(r"(?m)^#{1,6}\s.*$", "", plain)
