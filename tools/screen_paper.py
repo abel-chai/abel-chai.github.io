@@ -55,7 +55,12 @@ def parse(xml_bytes):
             if re.search(rf"\b{re.escape(key)}\b", comment, re.I):
                 venue = label
                 break
-        kind = "顶会" if venue else ("workshop" if WORKSHOP.search(comment) else "预印本")
+        # 先判 workshop：很多稿子写「accepted to CoRL 2026 XXX workshop」，不能算正会
+        if WORKSHOP.search(comment):
+            kind = "workshop"
+            venue = f"{venue} workshop" if venue else "workshop"
+        else:
+            kind = "顶会" if venue else "预印本"
         out.append({
             "title": title, "link": link, "date": published,
             "comment": comment, "kind": kind, "venue": venue,
