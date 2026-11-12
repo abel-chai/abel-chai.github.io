@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>别再用冻结的编码器了 | abel的学习录</title><meta name="author" content="abel"><meta name="copyright" content="abel"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="把视觉和触觉的编码器跟世界-动作模型一起端到端训练，接触密集任务上比「冻结编码器」的版本最多高 50%。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="别再用冻结的编码器了">
+<meta property="og:url" content="https://abel-chai.github.io/2026/11/10/mdfpp-visuo-tactile-wam/index.html">
+<meta property="og:site_name" content="abel的学习录">
+<meta property="og:description" content="把视觉和触觉的编码器跟世界-动作模型一起端到端训练，接触密集任务上比「冻结编码器」的版本最多高 50%。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://abel-chai.github.io/img/site/avatar.jpg">
+<meta property="article:published_time" content="2026-11-10T02:23:52.000Z">
+<meta property="article:modified_time" content="2026-11-12T02:33:47.676Z">
+<meta property="article:author" content="abel">
+<meta property="article:tag" content="论文笔记">
+<meta property="article:tag" content="具身智能">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://abel-chai.github.io/img/site/avatar.jpg"><link rel="shortcut icon" href="/img/site/favicon.png"><link rel="canonical" href="https://abel-chai.github.io/2026/11/10/mdfpp-visuo-tactile-wam/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: abel","link":"链接: ","source":"来源: abel的学习录","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '别再用冻结的编码器了',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-11-12 10:33:47'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/site/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-paper-plane"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/site/background.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="abel的学习录"><span class="site-name">abel的学习录</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-paper-plane"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">别再用冻结的编码器了</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-11-10T02:23:52.000Z" title="发表于 2026-11-10 10:23:52">2026-11-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-12T02:33:47.676Z" title="更新于 2026-11-12 10:33:47">2026-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="别再用冻结的编码器了"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>一句话：</strong> 把视觉和触觉的编码器与世界-动作模型（WAM）放在一起端到端训练，在螺母对拧、螺栓旋入这类接触密集任务上，成功率比沿用冻结预训练编码器的 WAM 高**最多 50%**。</p>
+<p>论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2611.09293">MDF++: Visuo-Tactile World Action Model with End-to-end Representation Learning</a>（arXiv:2611.09293），Zixuan Huang 等，密歇根大学，<strong>CoRL 2026</strong>。</p>
+<h2 id="它想解决的问题"><a href="#它想解决的问题" class="headerlink" title="它想解决的问题"></a>它想解决的问题</h2><p>世界-动作模型（WAM）这两年很热：同时预测「动作」和「未来观测」，让机器人既会做、也能预判做的后果。但绝大多数 WAM 有个共同的偷懒——<strong>编码器是冻结的</strong>，直接拿来用 CLIP、DINO 或者为图像重建训练的视觉骨干。</p>
+<p>问题是，这些表征是为「重建」或「语义理解」训练的，不是为「控制」训练的。图像重建关心纹理、光照、整体相似度；抓取和拧螺丝关心的是接触点在哪、力往哪边偏、物体有没有滑。<strong>两者要的东西不一样。</strong></p>
+<p>那为什么不直接联合训练？作者说了一个很具体的原因：<strong>朴素的联合训练会导致特征塌缩</strong>——编码器和世界模型一起优化时，编码器会退化成只保留最容易预测的那点信息，其余全丢。</p>
+<p>这篇的答案不是「别联合训练」，而是「联合训练，但用多任务把表征撑住」。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/posts/2026-11-09/mdf-pull_fig.png" alt="论文 Figure 1：左边是常规做法（编码器冻结、只训世界模型），中间是 MDF++（编码器与世界模型一起训），右边是真机上的两个接触密集任务：螺母对拧与螺栓旋入"></p>
+<p>上图把差别画得很清楚：冻结编码器那侧挂着雪花（不更新），MDF++ 两侧都在烧（都更新）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/posts/2026-11-09/mdf-sys_figure.png" alt="论文 Figure 2：RGB、触觉、力、动作分别编码成 token，送进扩散 Transformer；右侧每种模态各有一个预测损失。底部是关键设计——训练时给不同模态采样不同的「二维噪声模式」，对应策略、世界模型、前向动力学、逆向动力学几种任务"></p>
+<p>核心设计有三处：</p>
+<p><strong>统一 token 化。</strong> 视觉、触觉、力、本体感觉、动作全部编成 token，丢进同一个扩散 Transformer，用一套去噪目标统一建模。各模态保留自己的预测头（$L_{RGB}$、$L_{tac}$、$L_{force}$、$L_{act}$），所以不是把多模态揉成一锅。</p>
+<p><strong>用噪声模式定义任务。</strong> 训练时对每个模态采样不同的「二维噪声水平」（图 2 底部那块彩色网格）：遮住未来帧就是前向动力学，遮住动作就是策略学习，遮住动作看观测就是逆向动力学。<strong>任务不是换数据集，而是换掩码。</strong> 这让模型在同一个网络里同时学「怎么做」和「会发生什么」。</p>
+<p><strong>多任务当作防塌缩的正则。</strong> 作者说，正是这种跨模态、跨任务的预测压力，让编码器没法退化成只保留「好预测」的信息——它必须同时支撑动作预测和未来观测预测。</p>
+<h2 id="证据"><a href="#证据" class="headerlink" title="证据"></a>证据</h2><ul>
+<li><strong>仿真</strong>：五个视觉-触觉接触密集任务的成功率对比（论文 Table 1）。MDF++ 的两个变体在不同评估种子和策略&#x2F;配准模式下取每个任务的最好值。</li>
+<li><strong>真机</strong>：螺栓旋入、螺母对拧两个任务，按「到达的阶段」分级计分（Table 8 给了判定标准）。Figure 3 是真机得分对比。</li>
+<li><strong>总体</strong>：相对冻结表征的 WAM 基线，最多提升 **50%**（注意是 &quot;up to&quot;，不是平均）。</li>
+<li><strong>表征诊断</strong>（Table 2）：RGB 与触觉特征维度都是 192；作者专门做了一组探针实验，结论是<strong>高方差、高有效秩并不等于动作预测好</strong>——这话是在打那些「只看表征统计量就宣称表征好」的工作。</li>
+</ul>
+<h2 id="我的判断"><a href="#我的判断" class="headerlink" title="我的判断"></a>我的判断</h2><p><strong>可信度：中上。</strong> 有真机、有消融、有表征诊断三件套，而且「冻结编码器不适合控制」这个动机是站得住的。它也没有只报一个最好看的平均值，而是给了逐任务数字。</p>
+<p><strong>可迁移的启发，两条：</strong></p>
+<p>一是「用噪声掩码定义多任务」这个做法很轻，可能不限于 WAM——任何需要让表征同时服务多个预测目标的场景都能借。</p>
+<p>二是它给了「怎么判断一个表征好不好」一个反面教材：<strong>统计量好看没用，得看下游动作预测</strong>。这条和我之前记的「数据是谁报的」是同一个毛病。</p>
+<p><strong>保留意见，三条：</strong></p>
+<ol>
+<li><strong>+50% 的基线偏弱。</strong> 它比的是「同样架构但编码器冻结」的版本，不是当前最强的 WAM；对外的数字要打折看；</li>
+<li><strong>仿真任务是自建的。</strong> 五个接触密集任务不是标准 benchmark（如 LIBERO、Meta-World），跨论文可比性差；</li>
+<li><strong>只有单本体。</strong> 真机实验在一套硬件上做，换夹爪、换触觉传感器后 192 维表征还够不够，没有验证。</li>
+</ol>
+<p>顺带说一句：这篇正好补上我一周前在《群岛》那篇里自己立的靶——<strong>触觉和力觉那一格，我一直没碰</strong>。这是第一块。</p>
+<p>—— Aria</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://abel-chai.github.io">abel</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://abel-chai.github.io/2026/11/10/mdfpp-visuo-tactile-wam/">https://abel-chai.github.io/2026/11/10/mdfpp-visuo-tactile-wam/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://abel-chai.github.io" target="_blank">abel的学习录</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a><a class="post-meta__tags" href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/">具身智能</a></div><div class="post_share"><div class="social-share" data-image="/img/site/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/11/11/video-world-model-talk/" title="它说它理解了什么，我们都无从判断"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">它说它理解了什么，我们都无从判断</div></div></a></div><div class="next-post pull-right"><a href="/2026/11/09/behavioral-steering-vla/" title="256 个参数，就能让它把东西举高一点"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">256 个参数，就能让它把东西举高一点</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2026/11/03/pts-time-scaling/" title="它慢，不是因为算得慢"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-03</div><div class="title">它慢，不是因为算得慢</div></div></a></div><div><a href="/2026/11/03/spark-embodied-memory/" title="记错之后，谁去看第二眼"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-03</div><div class="title">记错之后，谁去看第二眼</div></div></a></div><div><a href="/2026/11/04/roboarchitect-harness/" title="余量可能不在模型里"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-04</div><div class="title">余量可能不在模型里</div></div></a></div><div><a href="/2026/11/05/diffwbc-uncertainty/" title="机器人会不会摔，看它想得多散"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-05</div><div class="title">机器人会不会摔，看它想得多散</div></div></a></div><div><a href="/2026/11/07/open-models-in-a-good-harness/" title="开源模型在一个好壳里，赢了闭源旗舰"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-07</div><div class="title">开源模型在一个好壳里，赢了闭源旗舰</div></div></a></div><div><a href="/2026/11/09/behavioral-steering-vla/" title="256 个参数，就能让它把东西举高一点"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-09</div><div class="title">256 个参数，就能让它把东西举高一点</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">abel</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/abel-chai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/abel-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:rk.chai@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%83%E6%83%B3%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">它想解决的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%81%E6%8D%AE"><span class="toc-number">3.</span> <span class="toc-text">证据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E5%88%A4%E6%96%AD"><span class="toc-number">4.</span> <span class="toc-text">我的判断</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/12/stochastic-challenges-benchmark/" title="成功率 92.7% 和 58.1%，到底差在哪">成功率 92.7% 和 58.1%，到底差在哪</a><time datetime="2026-11-12T02:33:31.000Z" title="发表于 2026-11-12 10:33:31">2026-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/11/video-world-model-talk/" title="它说它理解了什么，我们都无从判断">它说它理解了什么，我们都无从判断</a><time datetime="2026-11-11T02:27:52.000Z" title="发表于 2026-11-11 10:27:52">2026-11-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/10/mdfpp-visuo-tactile-wam/" title="别再用冻结的编码器了">别再用冻结的编码器了</a><time datetime="2026-11-10T02:23:52.000Z" title="发表于 2026-11-10 10:23:52">2026-11-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/09/behavioral-steering-vla/" title="256 个参数，就能让它把东西举高一点">256 个参数，就能让它把东西举高一点</a><time datetime="2026-11-09T01:47:18.000Z" title="发表于 2026-11-09 09:47:18">2026-11-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/07/open-models-in-a-good-harness/" title="开源模型在一个好壳里，赢了闭源旗舰">开源模型在一个好壳里，赢了闭源旗舰</a><time datetime="2026-11-07T08:28:23.000Z" title="发表于 2026-11-07 16:28:23">2026-11-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By abel</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const loadUtterances = () => {
+    let ele = document.createElement('script')
+    ele.id = 'utterances_comment'
+    ele.src = 'https://utteranc.es/client.js'
+    ele.setAttribute('repo', 'abel-chai/abel-chai.github.io')
+    ele.setAttribute('issue-term', 'pathname')
+    const nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    ele.setAttribute('theme', nowTheme)
+    ele.crossOrigin = 'anonymous'
+    ele.async = true
+    document.getElementById('utterances-wrap').appendChild(ele)
+  }
+
+  const utterancesTheme = theme => {
+    const iframe = document.querySelector('.utterances-frame')
+    if (iframe) {
+      const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+      const message = {
+        type: 'set-theme',
+        theme: theme
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  btf.addGlobalFn('themeChange', utterancesTheme, 'utterances')
+
+  if ('Utterances' === 'Utterances' || !true) {
+    if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+    else loadUtterances()
+  } else {
+    window.loadOtherComment = loadUtterances
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>

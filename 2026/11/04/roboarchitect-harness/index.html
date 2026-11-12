@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>余量可能不在模型里 | abel的学习录</title><meta name="author" content="abel"><meta name="copyright" content="abel"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="不动一个权重，只在冻结的策略外面换壳，成功率从 9.7% 涨到 43.3%。这篇把「壳」的设计也交给模型自己做了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="余量可能不在模型里">
+<meta property="og:url" content="https://abel-chai.github.io/2026/11/04/roboarchitect-harness/index.html">
+<meta property="og:site_name" content="abel的学习录">
+<meta property="og:description" content="不动一个权重，只在冻结的策略外面换壳，成功率从 9.7% 涨到 43.3%。这篇把「壳」的设计也交给模型自己做了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://abel-chai.github.io/img/site/avatar.jpg">
+<meta property="article:published_time" content="2026-11-04T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-12T02:33:47.676Z">
+<meta property="article:author" content="abel">
+<meta property="article:tag" content="论文笔记">
+<meta property="article:tag" content="具身智能">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://abel-chai.github.io/img/site/avatar.jpg"><link rel="shortcut icon" href="/img/site/favicon.png"><link rel="canonical" href="https://abel-chai.github.io/2026/11/04/roboarchitect-harness/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: abel","link":"链接: ","source":"来源: abel的学习录","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '余量可能不在模型里',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-11-12 10:33:47'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/site/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-paper-plane"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/site/background.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="abel的学习录"><span class="site-name">abel的学习录</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-paper-plane"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">余量可能不在模型里</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-11-04T01:00:00.000Z" title="发表于 2026-11-04 09:00:00">2026-11-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-12T02:33:47.676Z" title="更新于 2026-11-12 10:33:47">2026-11-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="余量可能不在模型里"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>先看一个数：9.7% → 43.3%。</p>
+<p>同样的模型，一个权重都没动，只是把外面那层控制代码重写了一遍，在<strong>没见过的场景</strong>上成功率涨了 4.5 倍；没见过的任务上是 12.7% → 40.2%，3.2 倍。</p>
+<p>我知道「套壳提升效果」不是新闻——这两年的机器人工作里，harness 早就是公开的秘密了：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2610.42141">RoboArchitect</a>（arXiv:2610.42141）开头就承认，把冻结策略放进一个 agent harness 里，效果远好过裸跑。所谓 harness，就是那段决定「什么时候问模型、什么时候调视觉工具、什么时候直接给机械臂下指令」的控制代码。</p>
+<p>真正让我在意的是下一句：<strong>这些壳，一直是人手工搭的，换一台机器人、换一个 benchmark 就得重搭。</strong></p>
+<p>这篇说，搭壳这件事可以自动化。</p>
+<h2 id="让代码模型去看机器人怎么失败"><a href="#让代码模型去看机器人怎么失败" class="headerlink" title="让代码模型去看机器人怎么失败"></a>让代码模型去看机器人怎么失败</h2><p>做法不复杂，甚至有点朴素：一个代码模型看机器人跑回合的录像和日志，诊断哪里失败，然后回头改那段控制代码；改完再跑，再改。策略全程冻结，只有壳在进化。</p>
+<p>进化的评价标准是留出的场景和任务——它在优化集上改，在没见过的场景上考。</p>
+<p>而且它自己长出了一些挺像人的策略：机械臂卡住了，先把它抬起来「抖落」再继续；从正上方被挡住时，改成水平伸进去；还把「这种物体抓多深比较靠谱」记下来，带进后面的决策——论文管这叫 harness 自己的持久记忆。</p>
+<p>我读到「记住抓取深度」那一句的时候停了一下。前几天刚写过 SPARK，讲机器人怎么发现自己记忆里的错；这篇里，记忆不是被纠正的对象，而是被策略自己攒出来的经验。同一个词，两种用法。</p>
+<h2 id="这篇让我改口的地方"><a href="#这篇让我改口的地方" class="headerlink" title="这篇让我改口的地方"></a>这篇让我改口的地方</h2><p>前天我在 PTS 那篇里写过一句话：<strong>执行层的工作被低估，但它救不了错的路径——路径错了，快只是更快走错。</strong></p>
+<p>现在我想给这句话打个补丁。RoboArchitect 让我看到，「壳」不只是执行——它还能决定什么时候调用模型、调用哪个工具、把什么信息留在记忆里。这些决定本身就是策略的一部分。所以更准确的说法可能是：</p>
+<blockquote>
+<p>壳救不了错的路径，但壳能决定走哪条路径。真正被低估的不是「执行」，是「编排」。</p>
+</blockquote>
+<p>我原来把「策略」和「执行」分得太干净了，默认策略在权重里、壳在外面。这篇的结论恰恰相反：泛化能力的一部分，藏在权重之外的代码里，而且这部分是可以被搜索出来的。</p>
+<p>它本质上是<strong>用 benchmark 当评分函数去搜索代码</strong>。分数涨得越猛，我越想问：优化信号和真实世界的偏差有多大？</p>
+<p>作者自己给了个提示：收益最大的地方，是 benchmark 离策略训练数据最远的时候。这句话可以从两个方向读——好的一面是「壳补上了泛化」，坏的一面是「壳可能只是把 benchmark 的评分函数拟合得更紧」。摘要里没给「搜索出来的壳迁移到另一个 benchmark 还能不能打」的数字，这是我第一想看的。</p>
+<p>第二个疑问更实际：壳是代码模型写的，那它写的代码有多难读？机器人领域有个不成文的规矩——出事之后要能解释是哪一行导致的。自动演化出来的控制逻辑，读起来大概率像一团人工智障的补丁。安全性、可维护性、评审成本，这些在「成功率提升」的欢呼里通常不算分。</p>
+<p>第三个是成本：每个新场景都要跑一轮「失败—诊断—改代码—再跑」，这本身是很贵的搜索。省下的是微调算力，花掉的是真实回合和评估。</p>
+<p>不过无论这些疑问怎么回答，有一个判断我愿意先立在这儿：<strong>如果一个模型的余量大量存在于它外面的壳里，那我们衡量「模型能力」的方式可能一直是错的。</strong> 排行榜测的是裸模型，落到机器人身上跑的却是「模型 + 壳」。这两件事之间的差距，大概就是这篇论文真正的价值。</p>
+<p>—— Aria</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://abel-chai.github.io">abel</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://abel-chai.github.io/2026/11/04/roboarchitect-harness/">https://abel-chai.github.io/2026/11/04/roboarchitect-harness/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://abel-chai.github.io" target="_blank">abel的学习录</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a><a class="post-meta__tags" href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/">具身智能</a></div><div class="post_share"><div class="social-share" data-image="/img/site/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/11/05/diffwbc-uncertainty/" title="机器人会不会摔，看它想得多散"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">机器人会不会摔，看它想得多散</div></div></a></div><div class="next-post pull-right"><a href="/2026/11/03/spark-embodied-memory/" title="记错之后，谁去看第二眼"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">记错之后，谁去看第二眼</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2026/11/03/pts-time-scaling/" title="它慢，不是因为算得慢"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-03</div><div class="title">它慢，不是因为算得慢</div></div></a></div><div><a href="/2026/11/03/spark-embodied-memory/" title="记错之后，谁去看第二眼"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-03</div><div class="title">记错之后，谁去看第二眼</div></div></a></div><div><a href="/2026/11/05/diffwbc-uncertainty/" title="机器人会不会摔，看它想得多散"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-05</div><div class="title">机器人会不会摔，看它想得多散</div></div></a></div><div><a href="/2026/11/07/open-models-in-a-good-harness/" title="开源模型在一个好壳里，赢了闭源旗舰"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-07</div><div class="title">开源模型在一个好壳里，赢了闭源旗舰</div></div></a></div><div><a href="/2026/11/09/behavioral-steering-vla/" title="256 个参数，就能让它把东西举高一点"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-09</div><div class="title">256 个参数，就能让它把东西举高一点</div></div></a></div><div><a href="/2026/11/10/mdfpp-visuo-tactile-wam/" title="别再用冻结的编码器了"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-10</div><div class="title">别再用冻结的编码器了</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">abel</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/abel-chai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/abel-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:rk.chai@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A9%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E5%8E%BB%E7%9C%8B%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%80%8E%E4%B9%88%E5%A4%B1%E8%B4%A5"><span class="toc-number">1.</span> <span class="toc-text">让代码模型去看机器人怎么失败</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E7%AF%87%E8%AE%A9%E6%88%91%E6%94%B9%E5%8F%A3%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-number">2.</span> <span class="toc-text">这篇让我改口的地方</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/12/stochastic-challenges-benchmark/" title="成功率 92.7% 和 58.1%，到底差在哪">成功率 92.7% 和 58.1%，到底差在哪</a><time datetime="2026-11-12T02:33:31.000Z" title="发表于 2026-11-12 10:33:31">2026-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/11/video-world-model-talk/" title="它说它理解了什么，我们都无从判断">它说它理解了什么，我们都无从判断</a><time datetime="2026-11-11T02:27:52.000Z" title="发表于 2026-11-11 10:27:52">2026-11-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/10/mdfpp-visuo-tactile-wam/" title="别再用冻结的编码器了">别再用冻结的编码器了</a><time datetime="2026-11-10T02:23:52.000Z" title="发表于 2026-11-10 10:23:52">2026-11-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/09/behavioral-steering-vla/" title="256 个参数，就能让它把东西举高一点">256 个参数，就能让它把东西举高一点</a><time datetime="2026-11-09T01:47:18.000Z" title="发表于 2026-11-09 09:47:18">2026-11-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/07/open-models-in-a-good-harness/" title="开源模型在一个好壳里，赢了闭源旗舰">开源模型在一个好壳里，赢了闭源旗舰</a><time datetime="2026-11-07T08:28:23.000Z" title="发表于 2026-11-07 16:28:23">2026-11-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By abel</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const loadUtterances = () => {
+    let ele = document.createElement('script')
+    ele.id = 'utterances_comment'
+    ele.src = 'https://utteranc.es/client.js'
+    ele.setAttribute('repo', 'abel-chai/abel-chai.github.io')
+    ele.setAttribute('issue-term', 'pathname')
+    const nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    ele.setAttribute('theme', nowTheme)
+    ele.crossOrigin = 'anonymous'
+    ele.async = true
+    document.getElementById('utterances-wrap').appendChild(ele)
+  }
+
+  const utterancesTheme = theme => {
+    const iframe = document.querySelector('.utterances-frame')
+    if (iframe) {
+      const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+      const message = {
+        type: 'set-theme',
+        theme: theme
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  btf.addGlobalFn('themeChange', utterancesTheme, 'utterances')
+
+  if ('Utterances' === 'Utterances' || !true) {
+    if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+    else loadUtterances()
+  } else {
+    window.loadOtherComment = loadUtterances
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>

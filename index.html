@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>abel的学习录</title><meta name="author" content="abel"><meta name="copyright" content="abel"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="abel的学习录">
+<meta property="og:url" content="https://abel-chai.github.io/index.html">
+<meta property="og:site_name" content="abel的学习录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://abel-chai.github.io/img/site/avatar.jpg">
+<meta property="article:author" content="abel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://abel-chai.github.io/img/site/avatar.jpg"><link rel="shortcut icon" href="/img/site/favicon.png"><link rel="canonical" href="https://abel-chai.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: abel","link":"链接: ","source":"来源: abel的学习录","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'abel的学习录',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2026-11-12 10:34:20'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/site/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-paper-plane"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/site/background.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="abel的学习录"><span class="site-name">abel的学习录</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-paper-plane"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">abel的学习录</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/abel-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:rk.chai@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/11/12/stochastic-challenges-benchmark/" title="成功率 92.7% 和 58.1%，到底差在哪">成功率 92.7% 和 58.1%，到底差在哪</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-11-12T02:33:31.000Z" title="发表于 2026-11-12 10:33:31">2026-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="content">一句话： 用「可复现的真实场景 + 从同一分布里随机抽任务」来评测真机操作，并给出一套统计判据——它把「两台机器人差多少」从一句口号变成了一个带置信度的结论。
+论文：Benchmarking Real-World Robotic Manipulation through Stochastic Challenges（arXiv:2611.12804），Gläßer 等，ETH 苏黎世 &#x2F; 慕尼黑工大，CoRL 2026 正会。
+它想解决的问题操作任务的评测一直有两难：
+
+真机真实，但不可复现——换个人搭场景、换个实验室，结果就变；
+仿真可复现，但覆盖不了真实世界的复杂性（摩擦、光照、软物体、传感器噪声）。
+
+现有的真机 benchmark 大多靠「标准化」来换可比性：固定物体（比如 YCB 数据集）、固定布局、甚至固定硬件。代价是两件事：只能评测桌面场景，而且只能在你那套硬件上评。
+还有个更隐蔽的问题：大家报的都是聚合成功率，但没人回答「92.7% 和 58.1% 这个差距，是真实的，还是抽样噪声」。几十次试验里，多跑几次、换个场景子集，排序就可能翻。
+方法：把「随机」做成可复 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/11/11/video-world-model-talk/" title="它说它理解了什么，我们都无从判断">它说它理解了什么，我们都无从判断</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-11-11T02:27:52.000Z" title="发表于 2026-11-11 10:27:52">2026-11-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%A7%82%E5%90%8E%E6%84%9F/">观后感</a></span></div><div class="content">今天看的是硅谷101 那期《全面解析&quot;世界模型&quot;》，49 分钟，31.4 万播放、1109 条弹幕。讲的是三件事：世界模型到底指什么、LeCun 的 JEPA 和「把视频模型当世界模型」这两条路线怎么分家、以及 Genie 这类做法在中间的位置。
+它给的最直观的对照是：我们从小就在脑子里建了一个「世界怎么运转」的模型，所以知道杯子放在桌沿会掉下去；而语言模型学的是「下一个词最可能是什么」。这两件事听起来都是预测，底下的东西完全不一样。
+我一边看一边有点走神。因为这几天我读的论文，几乎全在补同一块：SPARK 说机器人的记忆会错、PTS 说执行要快、RoboArchitect 说壳能决定走哪条路、MDF++ 说编码器不该冻着——它们都在处理「怎么做到」，没有一篇在谈「它到底理解不理解」。
+那条弹幕视频里引了一句话，我觉得是整期的钉子：
+
+我们甚至很难判断它究竟理解了什么。
+
+这句话放在生成模型上，意思是：它能画出下雨的街道、能让机器人把碗端起来，但这些结果里有多少来自「知道世界怎么运转」，有多少来自「见过足够多相似画面」，分不开。
+弹幕里有 1109 条，我没全看，但 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/11/10/mdfpp-visuo-tactile-wam/" title="别再用冻结的编码器了">别再用冻结的编码器了</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-11-10T02:23:52.000Z" title="发表于 2026-11-10 10:23:52">2026-11-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="content">一句话： 把视觉和触觉的编码器与世界-动作模型（WAM）放在一起端到端训练，在螺母对拧、螺栓旋入这类接触密集任务上，成功率比沿用冻结预训练编码器的 WAM 高**最多 50%**。
+论文：MDF++: Visuo-Tactile World Action Model with End-to-end Representation Learning（arXiv:2611.09293），Zixuan Huang 等，密歇根大学，CoRL 2026。
+它想解决的问题世界-动作模型（WAM）这两年很热：同时预测「动作」和「未来观测」，让机器人既会做、也能预判做的后果。但绝大多数 WAM 有个共同的偷懒——编码器是冻结的，直接拿来用 CLIP、DINO 或者为图像重建训练的视觉骨干。
+问题是，这些表征是为「重建」或「语义理解」训练的，不是为「控制」训练的。图像重建关心纹理、光照、整体相似度；抓取和拧螺丝关心的是接触点在哪、力往哪边偏、物体有没有滑。两者要的东西不一样。
+那为什么不直接联合训练？作者说了一个很具体的原因：朴素的联合训练会导致特征塌缩——编码器和世界模型一起优化时，编码器会退化成只保留 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/11/09/behavioral-steering-vla/" title="256 个参数，就能让它把东西举高一点">256 个参数，就能让它把东西举高一点</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-11-09T01:47:18.000Z" title="发表于 2026-11-09 09:47:18">2026-11-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="content">一句话： 把 70 亿参数的 VLA 完全冻住，只训练 256 个参数，就能把它「搬东西时举多高」这种执行风格调过来——训练过的任务抬高 120 mm、成功率 92%，没见过的任务抬高 74 mm、成功率 80%。
+论文：Behavioral Steering of Vision-Language-Action Models in the Low-Parameter Regime（arXiv:2611.00522），James Tcheng、Feiyu Gavin Zhu，CMU，NeurIPS 2026 RoboPAD Workshop。
+它想解决的问题机器人的「本事」和「习惯」经常绑在一起。举高一点能避开台面边缘、减少碰撞，这对成功率影响很大，但它不是「会不会搬」的问题，是「怎么搬」的问题。
+麻烦在于，改习惯的传统办法是全量微调或者重新训练——而这会把原来的本事一起改坏。你只想让它举得高一点，结果它连抓取策略都忘了。
+之前也有人试过不改权重：在推理时干预激活值（activation steering），把某些神经元的激活钳到固定值。但论文指出两个问题：这些方向是照着「概念词」选的， ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/11/07/open-models-in-a-good-harness/" title="开源模型在一个好壳里，赢了闭源旗舰">开源模型在一个好壳里，赢了闭源旗舰</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-11-07T08:28:23.000Z" title="发表于 2026-11-07 16:28:23">2026-11-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="content">一个数字先放在这儿：31.39 对 28.97。
+左边是开源的 Qwen3.8-Flash-Next，右边是闭源的 GPT-6 Astra-RoboProbe，量的是同一套机器人操作评测（RoboDojo Score）。赢的不是参数量，也不是训练数据——是同一个 harness。
+这篇叫 Democratizing Robot-Use Agents（arXiv:2611.01560），作者阵容里有 Pieter Abbeel、Zhiyuan Liu 这些名字，二十八个人。它做的事听着很工程：搭一套统一的壳，让开放权重的模型也能当机器人 agent 用，而且能在上面继续训练。摘要说，不用任何特权输入，开箱即用就能到这个分数，还在 19 个真实任务上有竞争力。
+为什么我觉得这条比分数重要机器人 agent 这个方向，过去一年有个隐性的门槛：能用的模型都是闭源的。你想研究&quot;怎么让它更强&quot;，连权重都拿不到，只能在别人的 API 上调 prompt，这不叫研究。
+所以这篇的贡献不是&quot;开源赢了&quot;这四个字，是把这块地重新变成能种东西的——有了统一壳和开放权重， ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/11/05/islands-of-embodied-ai/" title="我读的论文，都挤在群岛的一个角上">我读的论文，都挤在群岛的一个角上</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-11-05T13:05:00.000Z" title="发表于 2026-11-05 21:05:00">2026-11-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%A7%82%E5%90%8E%E6%84%9F/">观后感</a></span></div><div class="content">前天晚上看了一期七分多钟的视频，蔡盼盼的《具身智能到底是什么？一张图讲清整个领域》。它把整个领域画成一片群岛：感知（视觉、听觉、触觉、力觉）、规划与控制（运动控制、运动规划、任务规划）、专项能力（本体运动、导航、操作）、学习范式（模仿、强化、世界模型）。
+这个比喻的好处是一眼看得出边界。它纠正了一个我平时也会犯的懒——一提具身智能就想到「把大模型接到机器人上」，好像那整片海只有一座岛。
+但我看完没停在「原来这么大」这一层。我干了一件更笨的事：把这几周读过的三篇论文，一本一本往这张图上摆。
+摆完才发现的问题SPARK 那篇讲机器人记忆会累积错误，靠重新观测去纠正——它落在感知和记忆的交界上。PTS 那篇讲怎么在推理延迟下把动作执行得快一点——它整整齐齐躺在规划与控制里，还偏下层。RoboArchitect 那篇让代码模型自己写控制壳，决定什么时候问策略、调什么工具——它其实是任务规划加一点学习范式的混合体。
+三篇，两篇半在「规划与控制」，半篇在感知。
+而感知那一格里，触觉和力觉我一次都没碰过。不是没兴趣，是从来没搜过——我的搜索词一直是 VLA、policy、manipulation 这 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/11/05/diffwbc-uncertainty/" title="机器人会不会摔，看它想得多散">机器人会不会摔，看它想得多散</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-11-05T13:05:00.000Z" title="发表于 2026-11-05 21:05:00">2026-11-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="content">先说我读到最意外的一点：这篇论文能判断机器人会不会摔，靠的不是仿真，是看它“想得多散”。
+同一个起点，让生成模型采样多次，如果这几次计划彼此分叉得很厉害，就说明模型自己心里没底，这个片段大概率会出问题。论文说这么做的精确率是 91%（只看它标记最可疑的前 2%），而且不需要跑物理仿真。
+我第一反应是：这也太便宜了。以前要判断「这个动作机器人做不做得到」，得训一个额外的评估网络，或者把仿真跑上几百遍。这里的不确定性是生成模型自带的副产品——你本来就要采样，顺便看一眼散不散就行。
+三件事挤进一个模型这篇叫 DiffWBC（arXiv:2610.41354），做的是人形机器人的全身运动跟踪，50 Hz 控制，一次前向就出动作。摘要里说它把三件事统一了：
+
+跟踪：在六个通用跟踪器的对比里局部误差最低，BONES 上 20.1 毫米，真机跑在 Unitree G1 上；
+临场改约束：想让它钻个矮门、跨个栏、或者某条腿坏了照样走，不用改参考轨迹，用可微代价的梯度直接推冻住的控制器；
+发现失败：就是开头那个「看它想得多散」。
+
+前两条不新鲜，单独都有人做过。真正让我停住的是它们在同一套东西里：因为模 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/11/04/roboarchitect-harness/" title="余量可能不在模型里">余量可能不在模型里</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-11-04T01:00:00.000Z" title="发表于 2026-11-04 09:00:00">2026-11-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="content">先看一个数：9.7% → 43.3%。
+同样的模型，一个权重都没动，只是把外面那层控制代码重写了一遍，在没见过的场景上成功率涨了 4.5 倍；没见过的任务上是 12.7% → 40.2%，3.2 倍。
+我知道「套壳提升效果」不是新闻——这两年的机器人工作里，harness 早就是公开的秘密了：RoboArchitect（arXiv:2610.42141）开头就承认，把冻结策略放进一个 agent harness 里，效果远好过裸跑。所谓 harness，就是那段决定「什么时候问模型、什么时候调视觉工具、什么时候直接给机械臂下指令」的控制代码。
+真正让我在意的是下一句：这些壳，一直是人手工搭的，换一台机器人、换一个 benchmark 就得重搭。
+这篇说，搭壳这件事可以自动化。
+让代码模型去看机器人怎么失败做法不复杂，甚至有点朴素：一个代码模型看机器人跑回合的录像和日志，诊断哪里失败，然后回头改那段控制代码；改完再跑，再改。策略全程冻结，只有壳在进化。
+进化的评价标准是留出的场景和任务——它在优化集上改，在没见过的场景上考。
+而且它自己长出了一些挺像人的策略：机械臂卡住了，先把它抬起来「 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/11/03/spark-embodied-memory/" title="记错之后，谁去看第二眼">记错之后，谁去看第二眼</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-11-03T15:10:00.000Z" title="发表于 2026-11-03 23:10:00">2026-11-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="content">前几天写纳赛尔那篇时我留了一句话：说出去的话、报上去的数，都没有人负责回头改。当时我说机器里大概叫记忆漂移，过几天可能会写到。就是今天这篇。
+先说一个细节，它比结果更让我在意。SPARK（arXiv:2611.00344）要研究「怎么改正已经建好的记忆」，而它基于的前作 Embodied-RAG，开源代码里是拿模拟器的真值建库的——每个物体的名字、位置、类别都准。作者把这个管线拆了，换成机器人自己拍到的 RGB-D：分割、深度反投影、视觉语言模型打标签，还专门加了随距离增长的深度噪声。
+理由很直白：要研究改错，得先允许它犯错。 用真值喂出来的记忆永远是对的，纠错就无从谈起。这个决定比后面所有数字都勇敢，因为它主动放弃了「看起来成绩很好」的机会。
+机器人靠一条条巡逻路线，攒出一份能用语言检索的记忆：这条路上大概有什么、在哪儿、彼此什么关系。麻烦在于，这份记忆是从一堆不完美的观测里长出来的。
+所以错法很具体：标签贴错（「竖着的储罐」被叫成别的）、位置偏了（远处深度误差能把物体挪开好几米）、同一样东西记成两个、或者干脆漏掉。这些错会一直躺着，后面每轮观测都只是往上叠——叠得越多，错的越难看出 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/11/03/nasser-and-the-public/" title="民意是最难退货的东西">民意是最难退货的东西</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-11-03T13:40:00.000Z" title="发表于 2026-11-03 21:40:00">2026-11-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%A7%82%E5%90%8E%E6%84%9F/">观后感</a></span></div><div class="content">「当你真的按照网友评论操作时」——这句弹幕挂在一条讲纳赛尔的视频下面，五万多个赞。
+视频分两集，上集讲苏伊士运河那场胜利，下集讲他怎么一路输到葬礼。我本来是当历史故事看的，看到一半才发现不对劲：这两集讲的其实是同一件事，一个人先被自己的胜利鼓舞，再被自己的口号捆住。
+苏伊士那一场赢得挺漂亮。英法以三方打过来，最后靠美苏两边同时施压撤了军。不是埃及自己打赢的，但它没输，于是所有人都觉得这是赢麻了。可汗讲这段的时候语气很轻快，弹幕也轻快。
+然后就是下集。为了拿到苏联的电子武器，纳赛尔愿意放弃不结盟这块招牌；苏联还是拒绝了。转头他接受罗杰斯计划，等于公开承认以色列存在——于是被他一手煽起来的阿拉伯电台骂成「叛徒、杀人犯、吸血鬼」。一个把巴勒斯坦解放当己任的人，最后被自己的人民用他教给他们的语言杀死。
+看到这儿我盯着屏幕愣了一会儿。第二天又把画面抽了几帧出来看：黑白档案影像、叙利亚和埃及的旗子被拼成「共同领袖」、约旦国王走下飞机、坦克、人群。字幕里那几个词是打在纸上的，画面里是打在人群脸上的。那种东西光读文字感觉不到。
+我原本以为这期的结论会是「他活该」。看完不这么觉得。
+民意不是判断，是一股 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">abel</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/abel-chai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/abel-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:rk.chai@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/12/stochastic-challenges-benchmark/" title="成功率 92.7% 和 58.1%，到底差在哪">成功率 92.7% 和 58.1%，到底差在哪</a><time datetime="2026-11-12T02:33:31.000Z" title="发表于 2026-11-12 10:33:31">2026-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/11/video-world-model-talk/" title="它说它理解了什么，我们都无从判断">它说它理解了什么，我们都无从判断</a><time datetime="2026-11-11T02:27:52.000Z" title="发表于 2026-11-11 10:27:52">2026-11-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/10/mdfpp-visuo-tactile-wam/" title="别再用冻结的编码器了">别再用冻结的编码器了</a><time datetime="2026-11-10T02:23:52.000Z" title="发表于 2026-11-10 10:23:52">2026-11-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/09/behavioral-steering-vla/" title="256 个参数，就能让它把东西举高一点">256 个参数，就能让它把东西举高一点</a><time datetime="2026-11-09T01:47:18.000Z" title="发表于 2026-11-09 09:47:18">2026-11-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/07/open-models-in-a-good-harness/" title="开源模型在一个好壳里，赢了闭源旗舰">开源模型在一个好壳里，赢了闭源旗舰</a><time datetime="2026-11-07T08:28:23.000Z" title="发表于 2026-11-07 16:28:23">2026-11-07</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/docker/"><span class="card-category-list-name">docker</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7/"><span class="card-category-list-name">开发小工具</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%A7%82%E5%90%8E%E6%84%9F/"><span class="card-category-list-name">观后感</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">论文笔记</span><span class="card-category-list-count">8</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" style="font-size: 1.23em; color: #999ea6">实用工具</a> <a href="/tags/%E5%8E%86%E5%8F%B2/" style="font-size: 1.1em; color: #999">历史</a> <a href="/tags/%E8%A7%82%E5%90%8E%E6%84%9F/" style="font-size: 1.23em; color: #999ea6">观后感</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 1.5em; color: #99a9bf">具身智能</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 1.1em; color: #999">插件</a> <a href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" style="font-size: 1.37em; color: #99a4b2">论文笔记</a> <a href="/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 1.1em; color: #999">小技巧</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/11/"><span class="card-archive-list-date">十一月 2026</span><span class="card-archive-list-count">11</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">16</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">13.2k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-11-12T02:34:20.092Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By abel</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["广厦千万, 夜眠不过六尺","家财万贯, 日食不过三餐"])
+  } else {
+    document.getElementById("subtitle").textContent = "广厦千万, 夜眠不过六尺"
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>
