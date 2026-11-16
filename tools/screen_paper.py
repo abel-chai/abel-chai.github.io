@@ -15,7 +15,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 
-API = "http://export.arxiv.org/api/query"
+API = "https://export.arxiv.org/api/query"
 
 TOP = {
     "CoRL": "CoRL", "Conference on Robot Learning": "CoRL",
