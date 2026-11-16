@@ -118,6 +118,19 @@ def check(path: Path):
             issues.append("结尾是总结陈词，准则要求可以不升华")
         if last.count("！") >= 1 or body.count("！") >= 2:
             notes.append("感叹号偏多")
+
+    # 段落节奏：不要大量「一句话一段」（2026-11-16 反馈）
+    structural = ("**一句话", "论文：", "——", "- ", "> ", "|", "#")
+    prose = [p for p in paras
+             if not p.startswith(structural) and not p.startswith("![")
+             and len(p) > 25]
+    if len(prose) >= 6:
+        short = [p for p in prose if len(re.findall(r"[。！？]", p)) <= 1]
+        ratio = len(short) / len(prose)
+        if ratio > 0.35:
+            issues.append(f"单句成段占 {ratio:.0%}（{len(short)}/{len(prose)}），读起来碎；把短段并进相邻段落")
+        elif ratio > 0.2:
+            notes.append(f"单句成段占 {ratio:.0%}，略多，能并就并")
     return issues, notes
 
 
