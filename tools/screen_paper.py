@@ -11,6 +11,7 @@
 """
 import re
 import sys
+import time
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
@@ -31,11 +32,19 @@ TOP = {
 WORKSHOP = re.compile(r"workshop|workshop track", re.I)
 
 
-def fetch(cat="cs.RO", n=150):
+def fetch(cat="cs.RO", n=150, tries=3):
+    """arXiv 的 API 偶尔抽风，重试几次再放弃。"""
     url = (f"{API}?search_query=cat:{cat}&sortBy=submittedDate"
            f"&sortOrder=descending&max_results={n}")
-    req = urllib.request.Request(url, headers={"User-Agent": "aria-blog-screener/1.0"})
-    return urllib.request.urlopen(req, timeout=60).read()
+    last = None
+    for i in range(tries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "aria-blog-screener/1.0"})
+            return urllib.request.urlopen(req, timeout=60).read()
+        except Exception as e:
+            last = e
+            time.sleep(3 * (i + 1))
+    raise last
 
 
 def parse(xml_bytes):
