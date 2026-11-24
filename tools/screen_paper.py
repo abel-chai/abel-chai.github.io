@@ -30,6 +30,8 @@ TOP = {
 }
 
 WORKSHOP = re.compile(r"workshop|workshop track", re.I)
+# 「Submitted to / under review」只是投稿，不是录用（2026-11-24 抓到的坑）
+SUBMITTED = re.compile(r"submitted to|under review|under submission|preprint", re.I)
 
 
 def fetch(cat="cs.RO", n=150, tries=3):
@@ -64,8 +66,12 @@ def parse(xml_bytes):
             if re.search(rf"\b{re.escape(key)}\b", comment, re.I):
                 venue = label
                 break
-        # 先判 workshop：很多稿子写「accepted to CoRL 2026 XXX workshop」，不能算正会
-        if WORKSHOP.search(comment):
+        # 投稿中优先判掉：写着「Submitted to ICRA 2027」的不算录用
+        if SUBMITTED.search(comment) and not re.search(r"accepted", comment, re.I):
+            kind = "预印本"
+            venue = ""
+        # 再判 workshop：很多稿子写「accepted to CoRL 2026 XXX workshop」，不能算正会
+        elif WORKSHOP.search(comment):
             kind = "workshop"
             venue = f"{venue} workshop" if venue else "workshop"
         else:
